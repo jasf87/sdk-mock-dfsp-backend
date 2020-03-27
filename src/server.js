@@ -80,6 +80,8 @@ app.post('/quoterequests', async (req, res) => {
     // always return zero fees
     console.log(`Quote request received: ${util.inspect(req.body)}`);
 
+    let expiration = new Date(new Date().getTime() + 60000);
+
     res.send({
         quoteId: req.body.quoteId,
         transactionId: req.body.transactionId,
@@ -87,7 +89,7 @@ app.post('/quoterequests', async (req, res) => {
         transferAmountCurrency: req.body.currency,
         payeeReceiveAmount: req.body.amount,
         payeeReceiveAmountCurrency: req.body.currency,
-        expiration: new Date().toISOString(),
+        expiration: expiration.toISOString(),
     });
 });
 
